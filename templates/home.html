@@ -1,0 +1,415 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Hero Section with Carousel -->
+<div id="hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aW1hZ2VzJTIwcmVnYXJkaW5nJTIwbG9zdCUyMGFuZCUyMGZvdW5kJTIwd2Vic2l0ZXxlbnwwfHwwfHx8MA%3D%3D" class="d-block w-100" alt="Lost and Found 1">
+            <div class="carousel-caption d-none d-md-block">
+                <h4>Find What You've Lost</h4>
+                <p>Search through our extensive catalog of lost and found items.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aW1hZ2VzJTIwcmVnYXJkaW5nJTIwbG9zdCUyMGFuZCUyMGZvdW5kJTIwd2Vic2l0ZXxlbnwwfHwwfHx8MA%3D%3D" class="d-block w-100" alt="Lost and Found 2">
+            <div class="carousel-caption d-none d-md-block">
+                <h4>Report Lost Items</h4>
+                <p>Help others by reporting lost items and contribute to our community.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aW1hZ2VzJTIwcmVnYXJkaW5nJTIwbG9zdCUyMGFuZCUyMGZvdW5kJTIwd2Vic2l0ZXxlbnwwfHwwfHx8MA%3D%3D" class="d-block w-100" alt="Lost and Found 3">
+            <div class="carousel-caption d-none d-md-block">
+                <h4>Connect with Owners</h4>
+                <p>Use our platform to contact owners and return found items safely.</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<!-- <div class="hero-image-container">
+    <img src="https://c.stocksy.com/a/M4I000/z9/69462.jpg?1564933844" alt="Lost & Found Banner" class="hero-image">
+</div> -->
+
+
+<div class="filter-section">
+    <!-- <div class="container mt-3">
+        <h4>Filter Items</h4>
+        <form action="{{ url_for('electronics_lost') }}" method="GET">
+            <input type="hidden" name="category" value="electronics">
+            <input type="hidden" name="status" value="lost">
+            <button type="submit" class="btn btn-primary">View Lost Electronics</button>
+        </form>
+    </div> -->
+    <div class="filter-card">
+        <!-- <img src="https://c.pxhere.com/images/dd/fb/32f6e4c9eff8c290ca3466946ce7-1595236.jpg!d" alt="Electronics">
+        <p>Electronics</p> -->
+        <!-- <div class="col-md-4">
+            <div class="card home-category-card"> -->
+                <a href="{{ url_for('lost_electronics') }}">
+                    <img src="https://c.pxhere.com/images/dd/fb/32f6e4c9eff8c290ca3466946ce7-1595236.jpg!d" alt="Electronics">
+                    <!-- <div class="card-body text-center">
+                        <h5 class="card-title">Electronics</h5>
+                    </div> -->
+                    <p>Electronics</p>
+                    
+                </a>
+            <!-- </div>
+        </div> -->
+        
+    </div>
+    <div class="filter-card">
+        <a href="{{ url_for('lost_accessories') }}">
+        <img src="https://www.previousmagazine.com/wp-content/uploads/2019/10/Accessories-for-men-1024x715.jpg" alt="Accessories">
+        <p>Accessories</p>
+        </a>
+    </div>
+    <div class="filter-card">
+        <a href="{{ url_for('lost_documents') }}">
+        <img src="https://fatstacksblog.com/wp-content/uploads/2020/10/business-docs-oct21.jpg" alt="Documents">
+        <p>Documents</p>
+        </a>
+    </div> 
+    <div class="filter-card"> 
+        <a href="{{ url_for('lost_clothing') }}">
+        <img src="https://wallpaperaccess.com/full/2489626.jpg" alt="Clothing">
+        <p>Clothing</p>
+        </a>
+    </div>
+    <div class="filter-card">
+        <a href="{{ url_for('lost_keys') }}">
+        <img src="https://t3.ftcdn.net/jpg/00/51/41/06/360_F_51410623_0U4i0DbYPVuTrcRyKFq66zCrrDUwEqq5.jpg" alt="Keys">
+        <p>Keys</p>
+        </a>
+    </div>
+    <div class="filter-card">
+        <a href="{{ url_for('lost_other') }}">
+        <img src="https://i0.wp.com/tlcms.org/wp-content/uploads/2018/06/Lost-and-Found.jpg?resize=1024%2C640&ssl=1" alt="Others">
+        <p>Other Items</p>
+        </a>
+    </div>
+    <!-- <div class="container mt-3">
+        <h4>Filter Items</h4>
+        <form action="{{ url_for('electronics_lost') }}" method="GET">
+            <input type="hidden" name="category" value="electronics">
+            <input type="hidden" name="status" value="lost">
+            <button type="submit" class="btn btn-primary">View Lost Electronics</button>
+        </form>
+    </div> -->
+</div>
+
+<!-- Search and Filter Section -->
+<!-- <div class="row mb-4">
+    <div class="col-md-8">
+        <h2>Lost & Found Items</h2>
+    </div>
+    <div class="col-md-4">
+        <form class="d-flex" method="GET">
+            <input class="form-control me-2" type="search" name="search" placeholder="Search items...">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+    </div>
+</div> -->
+
+<!-- Filters Section -->
+<!-- <div class="row">
+    <div class="col-md-3 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>Filters</h5>
+            </div>
+            <div class="card-body">
+                <form method="GET">
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        <select class="form-select" name="category">
+                            <option value="">All Categories</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="books">Books</option>
+                            <option value="accessories">Accessories</option>
+                            <option value="others">Others</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <select class="form-select" name="status">
+                            <option value="">All Status</option>
+                            <option value="lost">Lost</option>
+                            <option value="found">Found</option>
+                            <option value="returned">Returned</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
+                </form>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- <div class="categories">
+        <a href="{{ url_for('category_page', category_name='electronics') }}">Electronics</a>
+        <a href="{{ url_for('category_page', category_name='accessories') }}">Accessories</a>
+        <a href="{{ url_for('category_page', category_name='documents') }}">Documents</a>
+        <a href="{{ url_for('category_page', category_name='keys') }}">Keys</a>
+        <a href="{{ url_for('category_page', category_name='clothing') }}">Clothing</a>
+        <a href="{{ url_for('category_page', category_name='other') }}">Other</a>
+    </div> -->
+
+    <!-- About the Website -->
+<section class="about-section">
+    <h1 style="text-align: left;">Campus Lost & Found</h1>
+    <p style="text-align: left;">
+        Welcome to our Campus Lost & Found platform, is a unique platform that incorporates a dynamic lost and found matching system for individual users, accompanied by a Lost and Found Inventory Management Software for businesses. Our approach is unique compared to traditional lost and found methods, however, the intention is still to reunite items lost or found with their respective owners.
+        <br><br>
+
+        The multi-level lost and found platform for individual users allows them to easily view, report, describe, and categorize lost or found items. Additionally users can add location information, upload photos, provide more in-depth details, and print fliers for local awareness. The matching system gives users the ability to receive up-to-date email notifications and system alerts of matching or similar lost or found items. The system works with individuals reporting lost or found items, along with businesses registered to use the lost and found inventory management software.
+        <br><br>
+        "Our goal is to provide individual users and businesses with the tools necessary for an effective and efficient online lost and found."
+    </p>
+</section>
+
+<!-- Step-by-Step Guide -->
+<section class="steps-section">
+    <h1 style="text-align: left;" >Step By Step Process</h1>
+    <ul style="list-style: none; padding: 0; text-align: left;">
+        <li>✔️ Enter lost or found item details (e.g., item lost or found, category, photos, date, time, etc).</li>
+        <li>✔️ Review details entered and submit the lost or found item report.</li>
+        <li>✔️ Receive an email with your user dashboard login and account information.</li>
+        <li>✔️ Within the dashboard, you can print fliers of the submitted lost or found item.</li>
+        <li>✔️ Receive notifications when newly submitted items match the details on your entry.</li>
+    </ul>
+    
+    <div class="steps">
+        <div class="step">
+            <span class="icon">📌</span>
+            <h3>Step 1: Register</h3>
+            <p>Create an account to report lost or found items.</p>
+        </div>
+        <div class="step">
+            <span class="icon">📝</span>
+            <h3>Step 2: Report</h3>
+            <p>Fill in the details of the lost or found item, including location and description.</p>
+        </div>
+        <div class="step">
+            <span class="icon">🔎</span>
+            <h3>Step 3: Search</h3>
+            <p>Browse items reported by others and find matches to your lost item.</p>
+        </div>
+        <div class="step">
+            <span class="icon">📞</span>
+            <h3>Step 4: Contact</h3>
+            <p>Connect with the person who found or lost the item and arrange a return.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Industry Services -->
+<section class="services-section">
+    <h1 style="text-align: left;">Industries Serviced</h1>
+    <div class="service-container">
+        <div class="service">
+            <img src="https://www.lostings.com/wp-content/uploads/2022/07/Hotel_Resort-Lost-and-Found.png" alt="Hotels">
+            <p>Hotel Lost and Found</p>
+            <!-- <p>Helping hotels manage lost guest belongings efficiently.</p> -->
+        </div>
+        <div class="service">
+            <img src="	https://www.lostings.com/wp-content/uploads/2022/07/Airport-Lost-and-Found.png" alt="Airports">
+            <p>Airport Lost and Found</p>
+            <!-- <p>Assisting travelers in recovering lost items at airports.</p> -->
+        </div>
+        <div class="service">
+            <img src="	https://www.lostings.com/wp-content/uploads/2022/07/College_University-Lost-and-Found.png" alt="Schools & Universities">
+            <p>College/University Lost and Found</p>
+            <!-- <p>Helping students recover lost books, bags, and devices.</p> -->
+        </div>
+        <div class="service">
+            <img src="https://www.lostings.com/wp-content/uploads/2022/07/Public-Transportation-Lost-and-Found.png" alt="Public Transport">
+            <p>Public Transit Lost and Found</p>
+            <!-- <p>Connecting users with lost items in taxis, buses, and trains.</p> -->
+        </div>
+        <div class="service">
+            <img src="https://www.lostings.com/wp-content/uploads/2022/07/Animal_Pet-Lost-and-Found.png" alt="Hotels">
+            <p>Animal/Pet Lost and Found</p>
+            <!-- <p>Helping hotels manage lost guest belongings efficiently.</p> -->
+        </div>
+        <div class="service">
+            <img src="	https://www.lostings.com/wp-content/uploads/2022/07/Taxi_Car-Service-Lost-and-Found.png" alt="Hotels">
+            <p>Taxi Lost and Found</p>
+            <!-- <p>Helping hotels manage lost guest belongings efficiently.</p> -->
+        </div>
+        <div class="service">
+            <img src="	https://www.lostings.com/wp-content/uploads/2022/07/Music-Venues_Sports-Areans-Lost-and-Found.png" alt="Hotels">
+            <p>Venue Lost and Found</p>
+            <!-- <p>Helping hotels manage lost guest belongings efficiently.</p> -->
+        </div>
+        <div class="service">
+            <img src="	https://www.lostings.com/wp-content/uploads/2022/07/Bar_Pub-and-Night-Club-Lost-and-Found.png" alt="Hotels">
+            <p>Bar Lost and Found</p>
+            <!-- <p>Helping hotels manage lost guest belongings efficiently.</p> -->
+        </div>
+        <div class="service">
+            <img src="https://www.lostings.com/wp-content/uploads/2022/07/Restaurant_Dining-Lost-and-Found.png" alt="Hotels">
+            <p>Restaurant Lost and Found</p>
+            <!-- <p>Helping hotels manage lost guest belongings efficiently.</p> -->
+        </div>
+        <div class="service">
+            <img src="	https://www.lostings.com/wp-content/uploads/2022/07/Rental-Car-Lost-and-Found.png" alt="Hotels">
+            <p>Rental Car Lost and Found</p>
+            <!-- <p>Helping hotels manage lost guest belongings efficiently.</p> -->
+        </div>
+        <div class="service">
+            <img src="	https://www.lostings.com/wp-content/uploads/2022/07/Museum_Gallery-Lost-and-Found.png" alt="Hotels">
+            <p>Museum Lost and Found</p>
+            <!-- <p>Helping hotels manage lost guest belongings efficiently.</p> -->
+        </div>
+        <div class="service">
+            <img src="	https://www.lostings.com/wp-content/uploads/2022/07/Public-Parks_Gardens-Lost-and-Found.png" alt="Hotels">
+            <p>Park Lost and Found</p>
+            <!-- <p>Helping hotels manage lost guest belongings efficiently.</p> -->
+        </div>
+    </div>
+</section>
+
+<section>
+    <h1>Where We Serve</h1>
+    <h6>Our platform serves various sectors, helping people recover their lost items efficiently.</h6>
+
+    <div style="text-align: left;">
+        <div class="sector"> Universities & Colleges - Helping students and faculty recover lost belongings.</div>
+        <div class="sector alternate"> Airports & Train Stations - Assisting travelers in retrieving misplaced items.</div>
+        <div class="sector"> Corporate Offices - Helping employees and visitors find lost possessions.</div>
+        <div class="sector alternate"> Shopping Malls & Retail Stores - Recover lost items in commercial spaces.</div>
+        <div class="sector"> Hotels & Resorts - Find items left behind in accommodations.</div>
+        <div class="sector alternate"> Hospitals & Healthcare Facilities - Assisting patients and visitors in finding lost valuables.</div>
+        <div class="sector"> Government Buildings - Helping citizens locate misplaced official documents.</div>
+        <div class="sector alternate"> Event Venues & Stadiums - Recover lost belongings at concerts, conferences, and sports events.</div>
+        <div class="sector"> Public Transport - Assisting in retrieving items left in buses, taxis, and metros.</div>
+        <div class="sector alternate"> Residential Communities - Helping residents track lost belongings in housing societies.</div>
+    </div>
+</section>
+
+    
+
+    <!-- Displaying Items -->
+    <div class="col-md-9">
+        <div class="row">
+            {% for item in items %}
+            <div class="col-md-4 mb-4">
+                <div class="card item-card h-100">
+                    {% if item.image_filename %}
+                    <img src="{{ url_for('static', filename='uploads/' + item.image_filename) }}" 
+                         class="card-img-top" alt="{{ item.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.title }}</h5>
+                        <p class="card-text">{{ item.description[:100] }}...</p>
+                        <div class="badge bg-{{ 'danger' if item.status == 'lost' else 'success' }}">
+                            {{ item.status.title() }}
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Posted on {{ item.date_posted.strftime('%Y-%m-%d') }}</small>
+                        <a href="{{ url_for('item_detail', item_id=item.id) }}" 
+                           class="btn btn-sm btn-primary float-end">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Feature Section -->
+<!-- <div class="container py-5">
+    <div class="row text-center">
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Reliable Platform</h5>
+                    <p class="card-text">Our platform ensures a trustworthy environment for finding and returning lost items.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Instant Notifications</h5>
+                    <p class="card-text">Get notified instantly when a new item is posted in your category or location.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Community Help</h5>
+                    <p class="card-text">Be part of the solution and help your community by reporting lost items and returning found ones.</p>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- Filter Section - Positioned Below the Carousel -->
+<!-- <div class="filter-section">
+    <div class="filter-card">
+        <img src="{{ url_for('static', filename='images/electronics.jpg') }}" alt="Electronics">
+        <p>Electronics</p>
+    </div>
+    <div class="filter-card">
+        <img src="{{ url_for('static', filename='images/accessories.jpg') }}" alt="Accessories">
+        <p>Accessories</p>
+    </div>
+    <div class="filter-card">
+        <img src="{{ url_for('static', filename='images/documents.jpg') }}" alt="Documents">
+        <p>Documents</p>
+    </div>
+    <div class="filter-card">
+        <img src="{{ url_for('static', filename='images/clothing.jpg') }}" alt="Clothing">
+        <p>Clothing</p>
+    </div>
+    <div class="filter-card">
+        <img src="{{ url_for('static', filename='images/keys.jpg') }}" alt="Keys">
+        <p>Keys</p>
+    </div>
+    <div class="filter-card">
+        <img src="{{ url_for('static', filename='images/others.jpg') }}" alt="Others">
+        <p>Others</p>
+    </div>
+</div> -->
+
+<!-- Footer Section -->
+<!-- <footer class="footer">
+    <div class="footer-container">
+         Left: Social Icons -->
+        <!-- <div class="social-icons">
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        </div> -->
+
+        <!-- Center: Copyright -->
+        <!-- <p>© 2025 YourWebsite. All rights reserved.</p> -->
+
+        <!-- Right: Footer Links -->
+        <!-- <div class="footer-links">
+            <a>News</a>
+            <a>FAQ</a>
+            <a>About</a>
+            <a>Search Terms</a>
+            <a>Privacy</a>
+            <a>Copyright 2024</a>
+        </div>
+    </div>
+</footer> -->
+
+<!-- Font Awesome (For Social Icons) -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">  -->
+
+
+
+
+{% endblock %}

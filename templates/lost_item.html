@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Report Lost {{ category.capitalize() }}</h2>
+
+    <!-- Form to Report Lost Items -->
+    <form method="POST">
+        <div class="mb-3">
+            <label class="form-label">Item Name</label>
+            <input type="text" name="item_name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Location</label>
+            <input type="text" name="location" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Date Lost</label>
+            <input type="date" name="date_lost" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea name="description" class="form-control" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Contact Info</label>
+            <input type="text" name="contact" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Report Lost Item</button>
+    </form>
+
+    <hr>
+
+    <!-- List of Lost Items -->
+    <h3>Reported Lost {{ category.capitalize() }}</h3>
+    <ul class="list-group">
+        {% for item in items %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+                <strong>{{ item.item_name }}</strong> - Lost at {{ item.location }} on {{ item.date_lost }}
+                <p>{{ item.description }}</p>
+                <small>Contact: {{ item.contact }}</small>
+            </div>
+            <div>
+                <a href="{{ url_for('edit_item', category=category, item_id=item.id) }}" class="btn btn-warning btn-sm">Edit</a>
+                <form method="POST" action="{{ url_for('delete_item', category=category, item_id=item.id) }}" class="d-inline">
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
+                </form>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Profile Information</h4>
+            </div>
+            <div class="card-body">
+                <div class="d-flex flex-column align-items-center text-center">
+                    <img src="{{ url_for('static', filename='images/default-profile.png') }}" alt="Profile" 
+                         class="rounded-circle" width="150">
+                    <div class="mt-3">
+                        <h4>{{ current_user.username }}</h4>
+                        <p class="text-muted">{{ current_user.email }}</p>
+                        <p class="text-muted">Role: {{ current_user.role.title() }}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h6 class="mb-0">Total Items</h6>
+                    </div>
+                    <div class="col-sm-6 text-end">
+                        {{ user_items|length }}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h6 class="mb-0">Active Items</h6>
+                    </div>
+                    <div class="col-sm-6 text-end">
+                        {{ user_items|selectattr('status', 'in', ['lost', 'found'])|list|length }}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h6 class="mb-0">Returned Items</h6>
+                    </div>
+                    <div class="col-sm-6 text-end">
+                        {{ user_items|selectattr('status', 'equalto', 'returned')|list|length }}
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{{ url_for('profile_settings') }}" class="btn btn-primary w-100">
+                    Edit Settings
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="card-title mb-0">My Items</h4>
+                <a href="{{ url_for('new_item') }}" class="btn btn-primary btn-sm">Report New Item</a>
+            </div>
+            <div class="card-body">
+                {% if user_items %}
+                    {% for item in user_items %}
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            {% if item.image_filename %}
+                            <div class="col-md-3">
+                                <img src="{{ url_for('static', filename='uploads/' + item.image_filename) }}"
+                                     class="img-fluid rounded-start" alt="{{ item.title }}"
+                                     style="object-fit: cover; height: 100%;">
+                            </div>
+                            {% endif %}
+                            <div class="col-md-{% if item.image_filename %}9{% else %}12{% endif %}">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <h5 class="card-title">{{ item.title }}</h5>
+                                        <span class="badge bg-{{ 'danger' if item.status == 'lost' else 'success' }}">
+                                            {{ item.status.title() }}
+                                        </span>
+                                    </div>
+                                    <p class="card-text">{{ item.description[:150] }}{% if item.description|length > 150 %}...{% endif %}</p>
+                                    <p class="card-text">
+                                        <small class="text-muted">
+                                            Posted on {{ item.date_posted.strftime('%Y-%m-%d') }} |
+                                            Category: {{ item.category.title() }} |
+                                            Location: {{ item.location }}
+                                        </small>
+                                    </p>
+                                    <div class="d-flex justify-content-end">
+                                        <a href="{{ url_for('item_detail', item_id=item.id) }}"
+                                           class="btn btn-sm btn-primary me-2">View Details</a>
+                                        {% if item.status != 'returned' %}
+                                        <form action="{{ url_for('update_item_status', item_id=item.id) }}" method="POST" class="d-inline">
+                                            <input type="hidden" name="status" value="returned">
+                                            <button type="submit" class="btn btn-sm btn-success"
+                                                    onclick="return confirm('Are you sure you want to mark this item as returned?')">
+                                                Mark as Returned
+                                            </button>
+                                        </form>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="text-center py-4">
+                        <p class="text-muted">You haven't reported any items yet.</p>
+                        <a href="{{ url_for('new_item') }}" class="btn btn-primary">Report Your First Item</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,75 @@
+ {% extends "base.html" %}
+{% block content %}
+<!-- <div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="GET" class="row g-3">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="q" 
+                               value="{{ request.args.get('q', '') }}" placeholder="Search...">
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" name="category">
+                            <option value="">All Categories</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="books">Books</option>
+                            <option value="accessories">Accessories</option>
+                            <option value="others">Others</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" name="status">
+                            <option value="">All Status</option>
+                            <option value="lost">Lost</option>
+                            <option value="found">Found</option>
+                            <option value="returned">Returned</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="date" class="form-control" name="date_from" 
+                               placeholder="From Date">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="date" class="form-control" name="date_to" 
+                               placeholder="To Date">
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="row">
+    {% for item in items %}
+    <div class="col-md-4 mb-4">
+        <div class="card item-card h-100">
+            {% if item.image_filename %}
+            <img src="{{ url_for('static', filename='uploads/' + item.image_filename) }}" 
+                 class="card-img-top" alt="{{ item.title }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ item.title }}</h5>
+                <p class="card-text">{{ item.description[:100] }}...</p>
+                <div class="badge bg-{{ 'danger' if item.status == 'lost' else 'success' }}">
+                    {{ item.status.title() }}
+                </div>
+                <div class="mt-2">
+                    <small class="text-muted">
+                        <i class="bi bi-eye"></i> {{ item.views }} views
+                    </small>
+                </div>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Posted on {{ item.date_posted.strftime('%Y-%m-%d') }}</small>
+                <a href="{{ url_for('item_detail', item_id=item.id) }}" 
+                   class="btn btn-sm btn-primary float-end">View Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

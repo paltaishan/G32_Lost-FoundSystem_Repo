@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Edit Lost Electronics</h2>
+
+    <form method="POST">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="title" id="title" class="form-control" value="{{ item.title }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="description" id="description" class="form-control" required>{{ item.description }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Update</button>
+        <a href="{{ url_for('electronics') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

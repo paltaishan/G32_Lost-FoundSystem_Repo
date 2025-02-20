@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    /* Ensure full-page layout with header & footer */
+    html, body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(to right, white, white);
+    }
+
+    /* Header & Footer Styling */
+    .header {
+        background: rgba(255, 255, 255, 0.9);
+        text-align: center;
+        padding: 10px 0;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .container {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 400px;
+        background: white;
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        width: 100%;
+        transition: 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #5a67d8;
+        transform: scale(1.05);
+    }
+
+    .toggle-link {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        color: #5a67d8;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .toggle-link:hover {
+        text-decoration: underline;
+        color: #3c4bd8;
+    }
+</style>
+
+<!-- Header Section -->
+<!-- <div class="header">
+     <h2>My Website</h2> -->
+<!-- </div>  -->
+
+<!-- Centered Form Container -->
+<div class="container">
+    <div class="card">
+        <h2 class="text-center">Login</h2>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="list-unstyled">
+                    {% for category, message in messages %}
+                        <li class="alert alert-{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Login Form -->
+        <form method="POST">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+
+        <p class="toggle-link" onclick="toggleForm()">Don't have an account? Register here</p>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<!-- Footer Section -->
+<!-- <footer class="footer text-center py-3">
+    <div class="container"> -->
+        <!-- Social Icons -->
+        <!-- <div class="mb-2">
+            <a href="https://facebook.com" target="_blank" class="mx-2"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com" target="_blank" class="mx-2"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com" target="_blank" class="mx-2"><i class="fab fa-twitter"></i></a>
+        </div> -->
+
+        <!-- Copyright -->
+        <!-- <p class="mb-1">© 2025 YourWebsite. All rights reserved.</p> -->
+
+        <!-- Footer Links -->
+        <!-- <div class="footer-links">
+            <a href="#">News</a> | 
+            <a href="#">FAQ</a> | 
+            <a href="#">About</a> | 
+            <a href="#">Search Terms</a> | 
+            <a href="#">Privacy</a> | 
+            <a href="#">Copyright 2024</a>
+        </div>
+    </div>
+</footer> -->
+
+
+
+{% endblock %}

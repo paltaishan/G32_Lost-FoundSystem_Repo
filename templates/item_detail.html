@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h2>{{ item.title }}</h2>
+        
+        <!-- Display Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for category, message in messages %}
+                        <li class="alert alert-{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        
+        <!-- Item Details -->
+        <div class="row">
+            <div class="col-md-6">
+                {% if item.image_filename %}
+                    <img src="{{ url_for('static', filename='uploads/' + item.image_filename) }}" alt="{{ item.title }}" class="img-fluid">
+                {% else %}
+                    <p>No image available for this item.</p>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <p><strong>Description:</strong> {{ item.description }}</p>
+                <p><strong>Category:</strong> {{ item.category }}</p>
+                <p><strong>Location:</strong> {{ item.location }}</p>
+                <p><strong>Posted on:</strong> {{ item.date_posted.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                <p><strong>Status:</strong> {{ item.status }}</p>
+                <p><strong>Views:</strong> {{ item.views }}</p>
+            </div>
+        </div>
+        
+        <!-- Update Item Status Form (if user is the owner of the item) -->
+        {% if current_user.is_authenticated and item.user_id == current_user.id %}
+            <form action="{{ url_for('update_item_status', item_id=item.id) }}" method="POST" class="mt-4">
+                <div class="form-group">
+                    <label for="status">Update Status:</label>
+                    <select class="form-control" id="status" name="status">
+                        <option value="lost" {% if item.status == 'lost' %}selected{% endif %}>Lost</option>
+                        <option value="found" {% if item.status == 'found' %}selected{% endif %}>Found</option>
+                        <option value="returned" {% if item.status == 'returned' %}selected{% endif %}>Returned</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Status</button>
+            </form>
+        {% endif %}
+
+        <!-- Link to go back to the profile -->
+        <a href="{{ url_for('profile') }}" class="btn btn-secondary mt-3">Back to Profile</a>
+    </div>
+{% endblock %}

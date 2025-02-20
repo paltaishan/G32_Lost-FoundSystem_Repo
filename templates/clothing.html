@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Your Reported Lost Clothing</h2>
+    
+    {% if items %}
+    <div class="row">
+        {% for item in items %}
+        <div class="col-md-4 mb-4">
+            <div class="card item-card h-100">
+                {% if item.image_filename %}
+                <img src="{{ url_for('static', filename='uploads/' + item.image_filename) }}" 
+                     class="card-img-top" alt="{{ item.title }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-text">{{ item.description[:100] }}...</p>
+                    <div class="badge bg-danger">{{ item.status.title() }}</div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <small class="text-muted">Reported on {{ item.date_posted.strftime('%Y-%m-%d') }}</small>
+                    <div>
+                        <a href="{{ url_for('edit_item', item_id=item.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                        <form action="{{ url_for('delete_item', item_id=item.id) }}" method="POST" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-center">No lost clothing reported yet.</p>
+    {% endif %}
+</div>
+
+<!-- Styling for Hover Effect -->
+<style>
+    .item-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    .item-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+{% endblock %}

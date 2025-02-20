@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    /* Full-page layout with flexbox */
+    html, body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(to right, white, white);
+    }
+
+    /* Header & Footer */
+    .header {
+        background: rgba(255, 255, 255, 0.9);
+        text-align: center;
+        padding: 10px 0;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .container {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    /* Card Styling */
+    .card {
+        width: 100%;
+        max-width: 400px;
+        background: white;
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        width: 100%;
+        transition: 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #5a67d8;
+        transform: scale(1.05);
+    }
+
+    .toggle-link {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        color: #5a67d8;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .toggle-link:hover {
+        text-decoration: underline;
+        color: #3c4bd8;
+    }
+</style>
+
+<!-- Header Section -->
+<div class="header">
+    <!-- <h2>My Website</h2> -->
+</div>
+
+<!-- Centered Form Container -->
+<div class="container">
+    <div class="card">
+        <h2 class="text-center">Register</h2>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="list-unstyled">
+                    {% for category, message in messages %}
+                        <li class="alert alert-{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Registration Form -->
+        <form method="POST">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select class="form-control" id="role" name="role">
+                    <option value="student" selected>Student</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+
+        <p class="toggle-link" onclick="toggleForm()">Already have an account? Login here</p>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<!-- <footer class="footer"> -->
+    <!-- <div class="footer-container"> -->
+        <!-- Left: Social Icons -->
+        <!-- <div class="social-icons">
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        </div> -->
+
+        <!-- Center: Copyright -->
+        <!-- <p>© 2025 YourWebsite. All rights reserved.</p>
+
+         Right: Footer Links -->
+        <!-- <div class="footer-links">
+            <a>News</a>
+            <a>FAQ</a>
+            <a>About</a>
+            <a>Search Terms</a>
+            <a>Privacy</a>
+            <a>Copyright 2024</a>
+        </div>
+    </div> -->
+<!-- </footer>  -->
+
+<!-- Font Awesome (For Social Icons) -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<script>
+    function toggleForm() {
+        window.location.href = "{{ url_for('login') }}";
+    }
+</script> -->
+
+{% endblock %}

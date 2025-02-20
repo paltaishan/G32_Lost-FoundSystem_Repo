@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Report Lost or Found - Electronics{% endblock %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h2>Did you lose or find an electronic item?</h2>
+    <p class="lead">Choose an option to continue:</p>
+
+    <a href="{{ url_for('report_lost', category='electronics') }}" class="btn btn-danger btn-lg mx-2">Report Lost</a>
+    <a href="{{ url_for('report_found', category='electronics') }}" class="btn btn-success btn-lg mx-2">Report Found</a>
+</div>
+{% endblock %}
